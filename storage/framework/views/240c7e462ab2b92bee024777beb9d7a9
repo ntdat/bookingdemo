@@ -1,0 +1,52 @@
+<?php $__env->startSection('controller-action','Add Facilities'); ?>
+<?php $__env->startSection('content'); ?>
+    <form action="<?php echo route('admin.fac.postadd'); ?>" method="POST" enctype="multipart/form-data">
+        <div class="col-lg-7" style="padding-bottom:120px">
+            <?php echo $__env->make('admin.block.error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+            <input type="hidden" name="_method" value="POST">
+            <div class="form-group">
+                <label>Title</label>
+                <input class="form-control" name="txtTitle" value="<?php echo old('txtTitle'); ?>"
+                       placeholder="Please Enter Title "/>
+            </div>
+            <div class="form-group">
+                <label>Icon</label>
+                <input class="form-control" name="txtIcon" value="<?php echo old('Icon'); ?>"
+                       placeholder="Use font icon instead image thumbnail?"/>
+                Example:
+                Input "fa-desktop" for <a target="_blank" href="http://fortawesome.github.io/Font-Awesome/icons/"> Fontawesome</a>
+
+            </div>
+            <div class="form-group">
+                <label>Position</label>
+                <input class="form-control" name="txtPosition" value="<?php echo old('txtPosition'); ?>"
+                       placeholder="Please Enter Number Position"/>
+            </div>
+            <div class="form-group">
+                <label>Product Status</label>
+                <label class="radio-inline">
+                    <input name="txtStatus" <?php if (Input::old('txtStatus') == 1) {
+                        echo 'checked="checked"';
+                    } ?> value="1" type="radio">Visible
+                </label>
+                <label class="radio-inline">
+                    <input name="txtStatus" value="2" <?php if (Input::old('txtStatus') == 2) {
+                        echo 'checked="checked"';
+                    } ?>  type="radio">Invisible
+                </label>
+            </div>
+            <button type="submit" class="btn btn-default">Add Facilities</button>
+            <button type="reset" class="btn btn-default">Reset</button>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label>Image</label>
+                <input type="file" name="imgfac">
+            </div>
+        </div>
+        </form>
+            </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

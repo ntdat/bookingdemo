@@ -1,0 +1,34 @@
+<?php $__env->startSection('content'); ?>
+    <!-- slider -->
+    <?php echo $__env->make('template.block.slider', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>;
+    <!--//slider-->
+
+    <!--main search-->
+    <?php echo $__env->make('template.block.search',$offer, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <!--// main search-->
+
+    <!--main-->
+    <div class="main" role="main">
+        <div class="wrap clearfix">
+            <!--latest offers-->
+            <?php echo $__env->make('template.block.offer',$offer, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <!--//latest offers-->
+
+            <!--hotel-->
+            <?php echo $__env->make('template.block.hotelofindex',$hotel, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <!--//hotel-->
+
+            <!--car-->
+            <?php echo $__env->make('template.block.car',$car, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <!--//car-->
+
+            <!--top destinations-->
+            <?php echo $__env->make('template.block.destinations',$tour, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <!--//top destinations-->
+
+        </div>
+    </div>
+    <!--//main-->
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('template.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

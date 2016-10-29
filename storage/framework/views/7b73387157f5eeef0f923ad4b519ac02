@@ -1,0 +1,42 @@
+<!--deals-->
+<section class="deals clear-fix full">
+    <h2>Most popular Hotels</h2>
+    <div class="deals clearfix">
+        <!--deal-->
+        <?php foreach($hotel as $item): ?>
+        <article class="one-fourth">
+            <?php
+                $images = json_decode($item->images);
+                $images = (array)$images;
+                $first = reset($images);
+            ?>
+            <figure><a href="hotel.html" title=""><img src="<?php echo asset("resources/upload/imagehotel/$first"); ?>" alt="" width="270" height="152" /></a></figure>
+            <div class="details">
+                <h1><?php echo str_limit($item->name, $limit = 15, $end = '...'); ?>
+
+                                <?php for($i = 0;$i < $item->star; $i++): ?>
+								<span class="stars">
+									<img src="<?php echo url('public/template/images/ico/star.png'); ?>" alt="star" />
+								</span>
+                                <?php endfor; ?>
+                </h1>
+                <span class="address"><?php echo $item->location; ?><a href="#"><br/>Show on map</a></span>
+
+                <span class="rating"> 8 /10</span>
+                <span class="price">Per Room/ 1 Night  <em>$
+                        <?php
+                        $price = \App\Room::select('price')->where('hotel_id',$item->id)->orderBy('price', 'asc')->get()->first();
+                          echo $price['price'];
+                        ?>
+                    </em> </span>
+                <div class="description">
+                    <?php echo str_limit($item->des, $limit = 240, $end = '... '); ?><a href="hotel.html">More info</a>
+                </div>
+                <a href="hotel.html" title="Book now" class="gradient-button">Book now</a>
+            </div>
+        </article>
+        <?php endforeach; ?>
+        <!--//deal-->
+    </div>
+</section>
+<!--//deals-->

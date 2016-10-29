@@ -1,0 +1,84 @@
+<?php $__env->startSection('controller-action','Add Room'); ?>
+<?php $__env->startSection('content'); ?>
+    <form action="<?php echo route('admin.room.postadd'); ?>" method="POST" enctype="multipart/form-data">
+        <div class="col-lg-7" style="padding-bottom:120px">
+            <?php echo $__env->make('admin.block.error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+            <input type="hidden" name="_method" value="POST">
+            <div class="form-group">
+
+                <label>Hotel Parent</label>
+                <select class="form-control" name="txtHotelid">
+                    <option value="">Please Choose Hotel</option>
+                    <?php for($i=0;$i<count($listhotel);$i++): ?>
+                        <?php if(Input::old('txtHotelid') == $listhotel[0]['id']): ?>
+                            <option value="<?php echo e($listhotel[$i]['id']); ?>" selected><?php echo e($listhotel[$i]['name']); ?></option>
+                        <?php else: ?>
+                            <option value="<?php echo e($listhotel[$i]['id']); ?>"><?php echo e($listhotel[$i]['name']); ?></option>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" name="txtName" value="<?php echo old('txtName'); ?>"
+                       placeholder="Please Enter Name Room"/>
+            </div>
+            <div class="form-group">
+                <label>Quality Room</label>
+                <select name="txtQuality" class="form-control">
+                    <option value="">Please Select Quality</option>
+                    <?php for($i=0;$i<=50;$i++): ?>
+                        <?php if(Input::old('txtQuality') == $i): ?>
+                            <?php echo "<option value='$i' selected>$i</option>"; ?>
+
+                        <?php else: ?>
+                            <?php echo "<option value='$i'>$i</option>"; ?>
+
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <input class="form-control" name="txtPrice" value="<?php echo old('txtPrice'); ?>"
+                placeholder="Please Enter Number Room"/>
+            </div>
+            <div class="form-group">
+                <label>Product Status</label>
+                <label class="radio-inline">
+                    <input name="txtStatus" <?php if (Input::old('txtStatus') == 1) {
+                        echo 'checked="checked"';
+                    } ?> value="1" type="radio">Visible
+                </label>
+                <label class="radio-inline">
+                    <input name="txtStatus" value="2" <?php if (Input::old('txtStatus') == 2) {
+                        echo 'checked="checked"';
+                    } ?>  type="radio">Invisible
+                </label>
+            </div>
+            <button type="submit" class="btn btn-default">Add Hotel</button>
+            <button type="reset" class="btn btn-default">Reset</button>
+
+        </div>
+
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <div class="form-group col-md-10">
+                <label>Facilities</label>
+                <select class="form-control"  name="listfac[]" multiple>
+                    <?php foreach($listfac as $key => $val): ?>
+                        <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group  col-md-10">
+                <label>Image Room</label>
+                <input type="file" name="imgroom">
+            </div>
+        </div>
+        </form>
+            </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
